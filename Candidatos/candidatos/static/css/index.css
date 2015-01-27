@@ -1,0 +1,116 @@
+html{
+	background:#F4F4F4;
+}
+body, html{
+	margin:0;
+	padding:0;
+	font-family: Helvetica, Arial, sans-serif;
+}
+.main {
+	width: 940px;
+	margin:0 auto;
+	-webkit-box-shadow: #666 0px 0px 20px;
+	-moz-box-shadow: #666 0px 0px 20px;
+	box-shadow: #666 0px 0px 20px;
+	height:auto;
+	overflow: hidden;
+	background:#FFF;
+	padding:10px;
+}
+a{
+	text-decoration:none;
+}
+header{
+	height:90px;
+	width:940px;
+	margin:0 0 15px 0;
+	padding:0;
+	
+}
+
+h1 {
+	font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	color: #333;
+	text-align:center;	
+	font-size: 2.3em;
+}
+.dip, .dip1{
+	width:190px;
+	height:auto;
+	overflow:hidden;
+	display: inline-block;
+	text-align:center;
+	font-family: "Gill Sans MT", Helvetica, Arial, sans-serif;
+	color:#333;
+	font-size: 1em;
+}
+.dip img, .dip1 img{border:10px #000 solid;
+}
+.dip{margin:25px 40px 0 0;}
+.dip1{margin:25px 0 0 0;}
+
+h3 {
+	font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	color: #333;
+	text-align:center;	
+	font-size: 1.2em;
+}
+hr{
+	height:4px;
+	background:#0BA000;
+	
+}
+.nota{
+	font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	color:#FF2785;	
+	font-size: 1.1em;
+}
+.tbUbica{
+	border-top:1px solid #414141;
+	border-left:1px solid #414141;
+	width:400px;
+	margin:0 auto;
+	height:auto;
+	overflow:hidden;
+	
+}
+.A, .B{
+	border-right:1px solid #414141;
+	border-bottom:1px solid #414141;
+	width:199px;
+	height:20px;
+	text-align:center;
+	display:block;
+	float:left;
+	margin:0;
+	padding:5px 0px;
+}
+.logos{
+	height:105px;
+	width:940px;
+	margin:0;
+	padding:0;
+}
+.logos img{
+	height:80px;
+	width:80px;
+	margin:0 10px 0 0;
+}
+ <style type="text/css">
+      br { clear: both; }
+      .cntSeparator {
+        font-size: 54px;
+        margin: 10px 7px;
+        color: #000;
+      }
+      .desc { margin: 7px 3px; }
+      .desc div {
+        float: left;
+        font-family: Arial;
+        width: 70px;
+        margin-right: 65px;
+        font-size: 13px;
+        font-weight: bold;
+        color: #000;
+      }
+    </style>

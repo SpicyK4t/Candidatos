@@ -8,6 +8,9 @@ from django.template.defaultfilters import slugify
 class Publicidad(models.Model):
 	imagen = models.ImageField(upload_to = 'banners_publicidad')
 
+	def __unicode__(self):
+		return self.imagen
+
 #Modelo Candidato
 class Candidato(models.Model):
 	tipos_estilos = (
@@ -30,12 +33,24 @@ class Candidato(models.Model):
 	tipo_candidato = models.IntegerField(default = 1, choices = tipos_candidatos)
 	municipio = models.CharField(max_length =  30)
 	distrito = models.CharField(max_length = 30)
+	slug = models.SlugField()
+
+	def save(self, *args, **kwargs):
+		if self.nombre:
+			self.slug = slugify(self.nombre)
+		super(Candidato, self).save(*args, **kwargs)
+
+	def __unicode__(self):
+		return self.nombre
 
 #modelo Compromiso
 class Compromiso(models.Model):
 	candidato = models.ForeignKey(Candidato)
 	imagen = models.ImageField(upload_to = 'compromiso_imagen')
 	texto = models.TextField()
+
+	def __unicode_(self):
+		return self.candidado + ">" + self.texto[:15]
 
 #modelo Noticia
 class Noticia(models.Model):
@@ -44,6 +59,9 @@ class Noticia(models.Model):
 	texto = models.TextField()
 	imagen = models.ImageField(upload_to = 'noticia_imagen')
 	fecha_publicacion = models.DateField(auto_now = True, auto_now_add = True)
+
+	def __unicode_(self):
+		return self.titulo
 
 #modelo Galeria
 class Galeria(models.Model):
@@ -62,6 +80,15 @@ class Galeria(models.Model):
 	nombre = models.CharField(max_length = 100)
 	nivel = models.IntegerField(default = 3, choices = niveles)
 	tipo_galeria = models.IntegerField(default = 1, choices = tipos_galerias)
+	slug = models.SlugField()
+
+	def save(self, *args, **kwargs):
+		if self.nombre:
+			self.slug = slugify(self.nombre)
+		super(Galeria, self).save(*args, **kwargs)
+
+	def __unicode__(self):
+		return self.nombre
 
 #modelo ItemImagen
 class ItemImagen(models.Model):
