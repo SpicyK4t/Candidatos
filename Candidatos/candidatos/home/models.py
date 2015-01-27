@@ -6,8 +6,7 @@ from django.template.defaultfilters import slugify
 
 #Modelo Publicidad
 class Publicidad(models.Model):
-	imagen = models.ImageField(upload_to = 'banners_publicidad')
-
+	imagen = models.ImageField(upload_to = 'banners_publicidad')	
 	def __unicode__(self):
 		return self.imagen
 

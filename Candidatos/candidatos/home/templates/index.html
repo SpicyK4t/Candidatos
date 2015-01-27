@@ -90,23 +90,13 @@ image: "{{ STATIC_URL }}images/digits.png"
     <img src="{{ STATIC_URL }}images/mid.jpg" width="940"/>
     
     <h1>CANDIDATOS ALCALDES 2015</h1>
-    
-    <a href="home.html" class="dip">
-        <img src="{{ STATIC_URL }}images/cand01.jpg" alt="Candidato diputado local 2015"/>
-        CANDIDATO <br>RENE DOMINGUEZ<br>DIPUTADO LOCAL
-    </a>
-    <a href="home.html" class="dip">
-        <img src="{{ STATIC_URL }}images/cand02.jpg" alt="Candidato diputado local 2015"/>
-        CANDIDATO <br>ANA PAULINA SERRATO<br>DIPUTADO LOCAL
-    </a>
-    <a href="home.html" class="dip">
-        <img src="{{ STATIC_URL }}images/cand03.jpg" alt="Candidato diputado local 2015"/>
-        CANDIDATO <br>ISELA JAUREGUI<br>DIPUTADO LOCAL
-    </a>
-    <a href="home.html" class="dip1">
-        <img src="{{ STATIC_URL }}images/cand04.jpg" alt="Candidato diputado local 2015"/>
-        CANDIDATO <br>PEDRO RAMIREZ<br>DIPUTADO LOCAL
-    </a>
+
+    {% for alcalde in alcaldes %}
+        <a href="#" class="dip">
+            <img src="{{ MEDIA_URL }}{{ alcalde.fotografia }}" alt="Candidato alcalde 2015" />
+            CANDIDATO <br> {{ alcalde.nombre }} <br> ALCALDE
+        </a>
+    {% endfor %}
     
     <hr>
     
