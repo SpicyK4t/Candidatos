@@ -3,16 +3,16 @@
 <head>
 <meta charset="utf-8">
 <title>Candidatos</title>
-<link rel="stylesheet" type="text/css" href="css/candidatos_verde.css">
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/candidatos_verde.css">
 </head>
 <body>
 
-<header><img src="images/header.jpg" alt="candidatos"/>
+<header><img src="{{ STATIC_URL }}images/header.jpg" alt="candidatos"/>
 </header><section class="redes">
 	<a href="home.html" class="lkInicio">Inicio</a>
     <p class="pRedes"> Visita nuestras redes sociales</p>
-    <a href="#" class="linkRedes"><img src="images/fb.jpg"/></a>
-    <a href="#" class="linkRedes"><img src="images/tw.jpg"/></a>
+    <a href="#" class="linkRedes"><img src="{{ STATIC_URL }}images/fb.jpg"/></a>
+    <a href="#" class="linkRedes"><img src="{{ STATIC_URL }}images/tw.jpg"/></a>
 </section>
 
 <nav>
@@ -29,7 +29,7 @@ document.write(diasSemana[f.getDay()] + ", " + f.getDate() + " de " + meses[f.ge
 </nav>
 
 <section class="bannerTop">
-    <a href="#"><img src="images/bannerTemp.jpg"/></a>
+    <a href="#"><img src="{{ STATIC_URL }}images/bannerTemp.jpg"/></a>
 </section>
 
 
@@ -40,11 +40,11 @@ document.write(diasSemana[f.getDay()] + ", " + f.getDate() + " de " + meses[f.ge
 		<h2>Conóceme</h2>
         <h3>Descripción básica del candidato</h3>
         <p>Texto simulado Texto simulado Texto simulado Texto simulado Texto simulado Texto simulado Texto simulado Texto simulado Texto simulado Texto simuladoTexto simulado</p>
-		<img src="images/conoce.jpg" alt=""/>
+		<img src="{{ STATIC_URL }}images/conoce.jpg" alt=""/>
 	</a>
     
     <article class="noticia">
-		<img src="images/noti01.jpg" width="583" alt=""/>
+		<img src="{{ STATIC_URL }}images/noti01.jpg" width="583" alt=""/>
 
 		<h2>22 de Junio</h2>
 		<p> El pasado 22 de junio por la mañana visité el mercado dorado en donde obtuve un gran recibimiento por parte de los locatarios del lugar, recorrí todas las instalaciones del mercado y saludé a cada uno de los comerciantes, escuché sus inconformidades y quejas y les expuse mis propuestas y mis compromisos con todos los comerciantes celayenses.

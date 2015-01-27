@@ -3,16 +3,16 @@
 <head>
 <meta charset="utf-8">
 <title>Candidatos</title>
-<link rel="stylesheet" type="text/css" href="css/candidatos_verde.css">
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/candidatos_verde.css">
 </head>
 <body>
 
-<header><img src="images/header.jpg" alt="candidatos"/>
+<header><img src="{{ STATIC_URL }}images/header.jpg" alt="candidatos"/>
 </header><section class="redes">
 	<a href="home.html" class="lkInicio">Inicio</a>
     <p class="pRedes"> Visita nuestras redes sociales</p>
-    <a href="#" class="linkRedes"><img src="images/fb.jpg"/></a>
-    <a href="#" class="linkRedes"><img src="images/tw.jpg"/></a>
+    <a href="#" class="linkRedes"><img src="{{ STATIC_URL }}images/fb.jpg"/></a>
+    <a href="#" class="linkRedes"><img src="{{ STATIC_URL }}images/tw.jpg"/></a>
 </section>
 
 <nav>
@@ -29,7 +29,7 @@ document.write(diasSemana[f.getDay()] + ", " + f.getDate() + " de " + meses[f.ge
 </nav>
 
 <section class="bannerTop">
-    <a href="#"><img src="images/bannerTemp.jpg"/></a>
+    <a href="#"><img src="{{ STATIC_URL }}images/bannerTemp.jpg"/></a>
 </section>
 
 
@@ -37,19 +37,19 @@ document.write(diasSemana[f.getDay()] + ", " + f.getDate() + " de " + meses[f.ge
 	<h1 class="h1">Galerías</h1>
 
 	<a href="galeria01.html" class="galItem">
-    	<img src="images/gal01/01.jpg"/>
+    	<img src="{{ STATIC_URL }}images/gal01/01.jpg"/>
         <p>Galeria No. 01</p>
     </a>
     <a href="galeria01.html" class="galItem">
-    	<img src="images/gal01/04.jpg"/>
+    	<img src="{{ STATIC_URL }}images/gal01/04.jpg"/>
         <p>Galeria No. 02</p>
     </a>
     <a href="galeria01.html" class="galItem">
-    	<img src="images/gal01/02.jpg"/>
+    	<img src="{{ STATIC_URL }}images/gal01/02.jpg"/>
         <p>Galeria No. 03</p>
     </a>
     <a href="galeria01.html" class="galItem">
-    	<img src="images/gal01/03.jpg"/>
+    	<img src="{{ STATIC_URL }}images/gal01/03.jpg"/>
         <p>Galeria No. 04</p>
     </a>
 </section>

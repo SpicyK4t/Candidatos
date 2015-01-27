@@ -59,6 +59,12 @@ class Noticia(models.Model):
 	texto = models.TextField()
 	imagen = models.ImageField(upload_to = 'noticia_imagen')
 	fecha_publicacion = models.DateField(auto_now = True, auto_now_add = True)
+	slug = models.SlugField()
+
+	def save(self, *args, **kwargs):
+		if self.titulo:
+			self.slug = slugify(self.titulo)
+		super(Noticia, self).save(*args, **kwargs)
 
 	def __unicode_(self):
 		return self.titulo
@@ -99,6 +105,18 @@ class ItemImagen(models.Model):
 #modelo ItemVideo
 class ItemVideo(models.Model):
 	galeria = models.ForeignKey(Galeria)
-	url = models.URLField()
+	titulo = models.CharField(max_length = 30)
 	texto = models.TextField()
+	url = models.URLField()
+	slug = models.SlugField()
+
+	def save(self, *args, **kwargs):
+		if self.titulo:
+			self.slug = slugify(self.titulo)
+		super(ItemVideo, self).save(*args, **kwargs)
+
+	def __unicode__(self):
+		return self.titulo
+
+	
 
