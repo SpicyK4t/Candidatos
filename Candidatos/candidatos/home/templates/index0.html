@@ -10,23 +10,20 @@
 <div class="main">
     <header><img src="{{ STATIC_URL }}images/headerppal.jpg"/></header>
     <h1>CANDIDATOS 2015</h1>
-    
-    <a href="home.html" class="dip">
-        <img src="{{ STATIC_URL }}images/cand01.jpg" alt="Candidato diputado local 2015"/>
-        CANDIDATO <br>RENE DOMINGUEZ<br>DIPUTADO LOCAL
-    </a>
-    <a href="home.html" class="dip">
-        <img src="{{ STATIC_URL }}images/cand02.jpg" alt="Candidato diputado local 2015"/>
-        CANDIDATO <br>ANA PAULINA SERRATO<br>DIPUTADO LOCAL
-    </a>
-    <a href="home.html" class="dip">
-        <img src="{{ STATIC_URL }}images/cand03.jpg" alt="Candidato diputado local 2015"/>
-        CANDIDATO <br>ISELA JAUREGUI<br>DIPUTADO LOCAL
-    </a>
-    <a href="home.html" class="dip1">
-        <img src="{{ STATIC_URL }}images/cand04.jpg" alt="Candidato diputado local 2015"/>
-        CANDIDATO <br>PEDRO RAMIREZ<br>DIPUTADO LOCAL
-    </a>
+
+    {% for candidato in candidatos %}
+        <a href="candidato/{{ candidato.slug }}/" class="dip">
+            <img src="{{ MEDIA_URL }}{{ candidato.fotografia }}" alt="Candidato {% if candidato.tipo_candidato == 1 %} alcalde 2015 {% elif candidato.tipo_candidato == 2 %} diputado local 2015 {% else %} diputado federal 2015 {% endif %}" />
+            CANDIDATO <br> {{ candidato.nombre }} <br> 
+            {% if candidato.tipo_candidato == 1 %}
+                ALCALDE
+            {% elif candidato.tipo_candidato == 2 %}
+                DIPUTADO LOCAL
+            {% else %}
+                DIPUTADO FEDERAL
+            {% endif %}
+        </a>
+    {% endfor %} 
     
     <hr>
     

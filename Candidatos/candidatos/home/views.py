@@ -8,8 +8,10 @@ def inicio(request):
 	d_federales = Candidato.objects.all().filter(tipo_candidato = 3)
 	return render(request, 'index.html', { "alcaldes" : alcaldes, "d_locales" : d_locales, "d_federales" : d_federales })
 
+#### Iniocio 2 Terminado ######
 def inicio2(request):
-	return render(request, 'index0.html')
+	candidatos = Candidato.objects.all()
+	return render(request, 'index0.html', { "candidatos" : candidatos })
 
 def candidato(request):
 	return render(request, 'home.html')
