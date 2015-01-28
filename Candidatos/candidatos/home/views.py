@@ -1,11 +1,11 @@
 from django.shortcuts import render
 from home.models import Candidato
 
+##### Inicio Terminado #######
 def inicio(request):
 	alcaldes = Candidato.objects.all().filter(tipo_candidato = 1)
 	d_locales = Candidato.objects.all().filter(tipo_candidato = 2)
 	d_federales = Candidato.objects.all().filter(tipo_candidato = 3)
-
 	return render(request, 'index.html', { "alcaldes" : alcaldes, "d_locales" : d_locales, "d_federales" : d_federales })
 
 def inicio2(request):
