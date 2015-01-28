@@ -13,8 +13,10 @@ def inicio2(request):
 	candidatos = Candidato.objects.all()
 	return render(request, 'index0.html', { "candidatos" : candidatos })
 
-def candidato(request):
-	return render(request, 'home.html')
+def candidato(request, n_candidato):
+	candidato = Candidato.objects.get(slug = n_candidato)
+	
+	return render(request, 'micrositio/home.html', { "candidato" : candidato })
 
 def perfil(request):
 	return render(request, 'conoceme.html')

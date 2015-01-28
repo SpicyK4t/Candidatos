@@ -13,10 +13,11 @@ class Publicidad(models.Model):
 #Modelo Candidato
 class Candidato(models.Model):
 	tipos_estilos = (
-		(1, 'Estilo de minisitio 1'),
-		(2, 'Estilo de minisitio 2'),
-		(3, 'Estilo de minisitio 3'),
-		(4, 'Estilo de minisitio 4'),
+		(1, 'Estilo Amarillo'),
+		(2, 'Estilo Azul'),
+		(3, 'Estilo Morado'),
+		(4, 'Estilo Naranja'),
+		(5, 'Estilo Verde'),
 	)
 	tipos_candidatos = (
 		(1, 'Alcalde'),
@@ -31,8 +32,8 @@ class Candidato(models.Model):
 	partido_politico = models.CharField(max_length = 50)
 	tipo_candidato = models.IntegerField(default = 1, choices = tipos_candidatos)
 	municipio = models.CharField(max_length =  30)
-	distrito = models.CharField(max_length = 30)
-	slug = models.SlugField()
+	distrito = models.CharField(max_length = 30, blank = True)
+	slug = models.SlugField(blank = True)
 
 	def save(self, *args, **kwargs):
 		if self.nombre:

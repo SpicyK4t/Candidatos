@@ -1,6 +1,8 @@
 from django.contrib import admin
 from home.models import Publicidad, Candidato, Compromiso, Noticia, Galeria, ItemImagen, ItemVideo
 
+
+
 # Register your models here.
 admin.site.register(Publicidad)
 admin.site.register(Candidato)

@@ -1,0 +1,34 @@
+{% extends "micrositio/base.html" %}
+
+{% block content %}
+    <a href="conoceme.html" class="conoceme">
+        <h2>Conóceme</h2>
+        <h3>Descripción básica del candidato</h3>
+        <p>Texto simulado Texto simulado Texto simulado Texto simulado Texto simulado Texto simulado Texto simulado Texto simulado Texto simulado Texto simuladoTexto simulado</p>
+        <img src="{{ STATIC_URL }}images/conoce.jpg" alt=""/>
+    </a>
+
+    <article class="destacada">
+    	<h2><p>Noticia destacada</p></h2>
+        <img src="{{ STATIC_URL }}images/destacada.jpg" alt="titulo de noticia"/>
+        <h1>TITULO DE LA NOTICIA</h1>
+        <p>Texto simulado Texto simulado Texto simulado Texto simulado Texto simulado Texto simulado Texto simulado Texto simulado Texto simulado Texto simuladoTexto simulado</p>
+        
+        <div class="videoInicio">
+        	<iframe width="390" height="275" src="//www.youtube.com/embed/7oDsYNxmBkU?rel=0" frameborder="0" allowfullscreen></iframe>
+         </div>
+        
+    	<a href="#" class="notiSec">
+    		<p class="tit">Titulo de noticia</p>
+            <p class="desc">Texto simulado Texto simulado Texto simulado Texto simulado</p>
+        </a>
+        <a href="#" class="notiSec">
+    		<p class="tit">Titulo de noticia</p>
+            <p class="desc">Texto simulado Texto simulado Texto simulado Texto simulado</p>
+        </a>
+        <a href="#" class="notiSec">
+    		<p class="tit">Titulo de noticia</p>
+            <p class="desc">Texto simulado Texto simulado Texto simulado Texto simulado</p>
+        </a>        
+    </article>
+{% endblock %}

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <title>Candidatos</title>        
+        {% if candidato.estilo == 1 %} 
+            <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/candidatos_amarillo.css">
+        {% elif candidato.estilo == 2 %}
+            <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/candidatos_azul.css"> 
+        {% elif candidato.estilo == 3 %}
+           <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/candidatos_morado.css"> 
+        {% elif candidato.estilo == 4 %}
+           <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/candidatos_naranja.css"> 
+        {% else %}
+           <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/candidatos_verde.css"> 
+        {% endif%}
+    </head>
+    <body>
+        <header>
+            <img src="{{ MEDIA_URL }}{{ candidato.banner }}" alt="candidatos"/>
+        </header>
+
+        <section class="redes">
+        	<a href="home.html" class="lkInicio">Inicio</a>
+            <p class="pRedes"> Visita nuestras redes sociales</p>
+            <a href="#" class="linkRedes"><img src="{{ STATIC_URL }}images/fb.jpg"/></a>
+            <a href="#" class="linkRedes"><img src="{{ STATIC_URL }}images/tw.jpg"/></a>
+        </section>
+
+        <nav>
+        	<a href="compromisos.html" >MIS COMPROMISOS</a>
+            <a href="noticias.html" >NOTICIAS</a>
+            <a href="galerias.html" >GALERIAS</a>
+            <a href="videos.html" >VIDEOS</a>
+            <p class="fecha"><script>
+        var meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+        var diasSemana = new Array("Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado");
+        var f=new Date();
+        document.write(diasSemana[f.getDay()] + ", " + f.getDate() + " de " + meses[f.getMonth()] + " de " + f.getFullYear());
+        		</script></p>
+        </nav>
+
+        <section class="bannerTop">
+            <a href="#"><img src="{{ STATIC_URL }}images/bannerTemp.jpg"/></a>
+        </section>
+
+        <section class="content">
+            {% block content %}
+            {% endblock %}
+        </section>
+
+        <footer>Sitio Web Candidatos</footer>
+
+    </body>
+</html>
