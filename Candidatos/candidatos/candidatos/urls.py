@@ -19,7 +19,7 @@ urlpatterns = patterns('',
     url(r'^candidato/(?P<n_candidato>[a-z-0-9]+)/galerias/$',                             'home.views.galerias'),
     url(r'^galeria/$',     'home.views.galeria'),
     url(r'^candidato/(?P<n_candidato>[a-z-0-9]+)/noticias/$',                             'home.views.noticias'),
-    url(r'^candidato/(?P<n_candidato>[a-z-0-9]+)/noticias/(?P<noticia>[a-z-0-9]+)/$',     'home.views.noticia'),
+    url(r'^candidato/(?P<n_candidato>[a-z-0-9]+)/noticias/(?P<t_noticia>[a-z-0-9]+)/$',   'home.views.noticia'),
     url(r'^candidato/(?P<n_candidato>[a-z-0-9]+)/videos/$',      'home.views.videos'),
     url(r'^video/$',       'home.views.video'),
 ) + static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)
