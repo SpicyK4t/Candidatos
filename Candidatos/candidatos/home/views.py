@@ -50,8 +50,10 @@ def compromisos(request, n_candidato):
 	compromisos = Compromiso.objects.all().filter(candidato = candidato)
 	return render(request, 'micrositio/compromisos.html', {"candidato":candidato, "compromisos":compromisos })
 
-def galerias(request):
-	return render(request, 'galerias.html')
+def galerias(request, n_candidato):
+	candidato = Candidato.objects.get(slug = n_candidato)
+	galerias = GaleriaImagenes.objects.all().filter(candidato = candidato)
+	return render(request, 'micrositio/galerias.html', {"candidato":candidato, "galerias":galerias})
 
 def galeria(request):
 	return render(request, 'galeria01.html')
