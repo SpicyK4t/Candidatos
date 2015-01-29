@@ -1,34 +1,32 @@
 {% extends "micrositio/base.html" %}
 
 {% block content %}
-    <a href="conoceme.html" class="conoceme">
+    <a href="/candidato/{{ candidato.slug }}/conoceme/" class="conoceme">
         <h2>Conóceme</h2>
-        <h3>Descripción básica del candidato</h3>
-        <p>Texto simulado Texto simulado Texto simulado Texto simulado Texto simulado Texto simulado Texto simulado Texto simulado Texto simulado Texto simuladoTexto simulado</p>
-        <img src="{{ STATIC_URL }}images/conoce.jpg" alt=""/>
+        <h3>Descripción</h3>
+        <p>{{ candidato.breveDescripcion  }}</p>
+        <img src="{{ MEDIA_URL }}{{ candidato.conoceme_foto}}" alt="" width="290" height="175" />
     </a>
 
     <article class="destacada">
     	<h2><p>Noticia destacada</p></h2>
         <img src="{{ STATIC_URL }}images/destacada.jpg" alt="titulo de noticia"/>
-        <h1>TITULO DE LA NOTICIA</h1>
-        <p>Texto simulado Texto simulado Texto simulado Texto simulado Texto simulado Texto simulado Texto simulado Texto simulado Texto simulado Texto simuladoTexto simulado</p>
+        <h1><a href="/candidato/{{ candidato.slug }}/noticias/{{ noticia_destacada.slug}}/">{{ noticia_destacada.titulo }}</a></h1>
+        <p>{{ noticia_destacada.breveDescripcion }}</p>
         
-        <div class="videoInicio">
-        	<iframe width="390" height="275" src="//www.youtube.com/embed/7oDsYNxmBkU?rel=0" frameborder="0" allowfullscreen></iframe>
+        <div class="videoInicio">            
+            {% if not video == None %}
+                {{ video|safe }}
+            {% elif not galeria == None %}
+                {{ galeria }}
+            {% endif %}
          </div>
-        
-    	<a href="#" class="notiSec">
-    		<p class="tit">Titulo de noticia</p>
-            <p class="desc">Texto simulado Texto simulado Texto simulado Texto simulado</p>
-        </a>
-        <a href="#" class="notiSec">
-    		<p class="tit">Titulo de noticia</p>
-            <p class="desc">Texto simulado Texto simulado Texto simulado Texto simulado</p>
-        </a>
-        <a href="#" class="notiSec">
-    		<p class="tit">Titulo de noticia</p>
-            <p class="desc">Texto simulado Texto simulado Texto simulado Texto simulado</p>
-        </a>        
+
+         {% for noticia in noticias %}
+            <a href="/candidato/{{ candidato.slug }}/noticias/{{ noticia.slug}}/" class="notiSec">
+                <p class="tit">{{ noticia.titulo }}</p>
+                <p class="desc">{{ noticia.breveDescripcion }}</p>
+            </a>
+         {% endfor %}            	      
     </article>
 {% endblock %}

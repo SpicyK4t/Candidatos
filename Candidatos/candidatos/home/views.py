@@ -1,5 +1,7 @@
 from django.shortcuts import render
-from home.models import Candidato
+from home.models import Candidato, Noticia, Video, GaleriaImagenes, Compromiso
+import urllib
+import json
 
 ##### Inicio Terminado #######
 def inicio(request):
@@ -13,16 +15,40 @@ def inicio2(request):
 	candidatos = Candidato.objects.all()
 	return render(request, 'index0.html', { "candidatos" : candidatos })
 
+#### candidato Terminado ######
 def candidato(request, n_candidato):
 	candidato = Candidato.objects.get(slug = n_candidato)
-	
-	return render(request, 'micrositio/home.html', { "candidato" : candidato })
 
-def perfil(request):
-	return render(request, 'conoceme.html')
+	try:
+		noticia_destacada = Noticia.objects.get(candidato = candidato, destacada = True)
+	except:
+		noticia_destacada = Noticia.objects.all()[0]
 
-def compromisos(request):
-	return render(request, 'compromisos.html')
+	noticias = Noticia.objects.all().filter(candidato = candidato, destacada = False)[0:2]
+
+	try:
+		video = Video.objects.get(candidato = candidato, destacado = True)
+		video = embed_video(video.url)
+		galeria = None
+	except:
+		try:
+			video = None
+			galeria = GaleriaImagenes.objects.get(candidato = candidato, destacada = True)
+		except:
+			galeria = None
+
+	return render(request, 'micrositio/home.html', { "candidato" : candidato, "noticia_destacada":noticia_destacada, "noticias":noticias, "video":video, "galeria":galeria })
+
+#### perfil Terminado ##############
+def perfil(request, n_candidato):
+	candidato = Candidato.objects.get(slug = n_candidato)
+	return render(request, 'micrositio/conoceme.html', {"candidato":candidato})
+
+####### perfil Compromisos #################
+def compromisos(request, n_candidato):
+	candidato = Candidato.objects.get(slug = n_candidato)
+	compromisos = Compromiso.objects.all().filter(candidato = candidato)
+	return render(request, 'micrositio/compromisos.html', {"candidato":candidato, "compromisos":compromisos })
 
 def galerias(request):
 	return render(request, 'galerias.html')
@@ -30,8 +56,11 @@ def galerias(request):
 def galeria(request):
 	return render(request, 'galeria01.html')
 
-def noticias(request):
-	return render(request, 'noticias.html')
+###### noticias Terminado ##############
+def noticias(request, n_candidato):
+	candidato = Candidato.objects.get(slug = n_candidato)
+	noticias = Noticia.objects.all().filter(candidato = candidato)
+	return render(request, 'micrositio/noticias.html', { "candidato" : candidato, "noticias" : noticias })
 
 def noticia(request):
 	return render(request, 'noti01.html')
@@ -42,3 +71,10 @@ def videos(request):
 def video(request):
 	return render(request, 'video01.html')
 
+################### HERRAMIENTAS #################3
+def embed_video(url):	
+	embed = 'http://www.youtube.com/oembed?url={0}&format=json'.format(url)
+	sock = urllib.urlopen(embed)
+	video = json.loads(sock.read())['html']	.replace('480', '390').replace('270', '275')
+	sock.close()
+	return video

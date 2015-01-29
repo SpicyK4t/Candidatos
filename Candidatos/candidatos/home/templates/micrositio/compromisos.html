@@ -1,0 +1,9 @@
+{% extends "micrositio/base.html" %}
+{% block content %}
+  <h1 class="h1">Compromisos</h1>
+  {% for compromiso in compromisos %}
+    <article id="textGen">
+      <p> <img class="imgCompromiso" src="{{ MEDIA_URL }}{{ compromiso.imagen }}" width="400" height="285" alt="" /> {{ compromiso.texto }} </p>  
+    </article>
+  {% endfor %}
+{% endblock %}

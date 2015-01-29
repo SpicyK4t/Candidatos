@@ -7,8 +7,15 @@ from django.template.defaultfilters import slugify
 #Modelo Publicidad
 class Publicidad(models.Model):
 	imagen = models.ImageField(upload_to = 'banners_publicidad')	
+	slug = models.SlugField(blank = True)
+
+	def save(self, *args, **kwargs):
+		if self.imagen:
+			self.slug = slugify(self.imagen)
+		super(Publicidad, self).save(*args, **kwargs)
+
 	def __unicode__(self):
-		return self.imagen
+		return self.slug
 
 #Modelo Candidato
 class Candidato(models.Model):
@@ -30,6 +37,9 @@ class Candidato(models.Model):
 	banner = models.ImageField(upload_to = 'candidato_banner')
 	estilo = models.IntegerField(default = 1, choices = tipos_estilos)
 	partido_politico = models.CharField(max_length = 50)
+	facebook = models.URLField(blank = True)
+	twitter = models.URLField(blank = True)
+	conoceme_foto = models.ImageField(upload_to = 'candidato_conoceme_foto')
 	tipo_candidato = models.IntegerField(default = 1, choices = tipos_candidatos)
 	municipio = models.CharField(max_length =  30)
 	distrito = models.CharField(max_length = 30, blank = True)
@@ -43,77 +53,83 @@ class Candidato(models.Model):
 	def __unicode__(self):
 		return self.nombre
 
+	def breveDescripcion(self):
+		return self.descripcion.split('\n')[0]
+
 #modelo Compromiso
 class Compromiso(models.Model):
 	candidato = models.ForeignKey(Candidato)
 	imagen = models.ImageField(upload_to = 'compromiso_imagen')
 	texto = models.TextField()
 
-	def __unicode_(self):
-		return self.candidado + ">" + self.texto[:15]
+	def __unicode__(self):
+		return "Compromiso " + self.candidato.__unicode__()
 
 #modelo Noticia
 class Noticia(models.Model):
 	candidato = models.ForeignKey(Candidato)
 	titulo = models.CharField(max_length = 100)
 	texto = models.TextField()
-	imagen = models.ImageField(upload_to = 'noticia_imagen')
+	destacada = models.BooleanField()
+	imagen = models.ImageField(upload_to = 'noticia_imagen', blank = True)
 	fecha_publicacion = models.DateField(auto_now = True, auto_now_add = True)
-	slug = models.SlugField()
+	slug = models.SlugField(blank = True)
 
 	def save(self, *args, **kwargs):
 		if self.titulo:
 			self.slug = slugify(self.titulo)
 		super(Noticia, self).save(*args, **kwargs)
 
-	def __unicode_(self):
+	def __unicode__(self):
 		return self.titulo
 
+	def breveDescripcion(self):
+		return (self.texto.split('\n')[0])[:171] + '[...]'
+
 #modelo Galeria
-class Galeria(models.Model):
-	niveles = (
-		(1, 'Muy Importante'),
-		(2, 'Importante'),
-		(3, 'Normal'),
-		(4, 'No tan importante'),
-		(5, 'No importante'),		
-	)
-	tipos_galerias = (
-		(1, 'Galeria de Imágenes'),
-		(2, 'Galeria de Videos'),
-	)
+class GaleriaImagenes(models.Model):
 	candidato = models.ForeignKey(Candidato)
 	nombre = models.CharField(max_length = 100)
-	nivel = models.IntegerField(default = 3, choices = niveles)
-	tipo_galeria = models.IntegerField(default = 1, choices = tipos_galerias)
-	slug = models.SlugField()
+	imagen = models.ImageField(upload_to = 'galeria_imagen')
+	destacada = models.BooleanField()	
+	slug = models.SlugField(blank = True)
 
 	def save(self, *args, **kwargs):
 		if self.nombre:
 			self.slug = slugify(self.nombre)
-		super(Galeria, self).save(*args, **kwargs)
+		super(GaleriaImagenes, self).save(*args, **kwargs)
 
 	def __unicode__(self):
-		return self.nombre
+		return self.candidato.nombre + ':' + self.nombre
 
 #modelo ItemImagen
 class ItemImagen(models.Model):
-	galeria = models.ForeignKey(Galeria)
+	galeria = models.ForeignKey(GaleriaImagenes)
 	imagen = models.ImageField(upload_to = 'galeria_imagen')
 	texto = models.TextField()
+	slug = models.SlugField(blank = True)
+
+	def save(self, *args, **kwargs):
+		if self.imagen:
+			self.slug = slugify(self.imagen)
+		super(ItemImagen, self).save(*args, **kwargs)
+
+	def __unicode__(self):
+		return self.galeria.nombre + '(' + self.galeria.candidato.nombre + '):' + self.slug
 
 #modelo ItemVideo
-class ItemVideo(models.Model):
-	galeria = models.ForeignKey(Galeria)
+class Video(models.Model):
+	candidato = models.ForeignKey(Candidato)
 	titulo = models.CharField(max_length = 30)
 	texto = models.TextField()
+	destacado = models.BooleanField()
 	url = models.URLField()
-	slug = models.SlugField()
+	slug = models.SlugField(blank = True)
 
 	def save(self, *args, **kwargs):
 		if self.titulo:
 			self.slug = slugify(self.titulo)
-		super(ItemVideo, self).save(*args, **kwargs)
+		super(Video, self).save(*args, **kwargs)
 
 	def __unicode__(self):
 		return self.titulo

@@ -1,0 +1,11 @@
+{% extends "micrositio/base.html" %}
+{% block content %}
+
+<h1 class="h1">Conoceme</h1>
+
+<article id="textGen">
+  <p><img class="conocemeA" src="{{ MEDIA_URL }}{{ candidato.conoceme_foto }}" width="400" height="285" alt=""/> 
+  {{ candidato.descripcion }}
+</article>
+    
+{% endblock %}
