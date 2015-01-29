@@ -64,13 +64,16 @@ def noticias(request, n_candidato):
 	noticias = Noticia.objects.all().filter(candidato = candidato)
 	return render(request, 'micrositio/noticias.html', { "candidato" : candidato, "noticias" : noticias })
 
+###### noticia Terminado ################
 def noticia(request, n_candidato, t_noticia):
 	candidato = Candidato.objects.get(slug = n_candidato)
 	noticia = Noticia.objects.get(slug = t_noticia, candidato = candidato)
 	return render(request, 'micrositio/noti01.html', { "candidato":candidato, "noticia":noticia })
 
-def videos(request):
-	return render(request, 'videos.html')
+def videos(request, n_candidato):
+	candidato = Candidato.objects.get(slug = n_candidato)
+	videos = Video.objects.all().filter(candidato = candidato)
+	return render(request, 'micrositio/videos.html', {"candidato":candidato, "videos":videos})
 
 def video(request):
 	return render(request, 'video01.html')
