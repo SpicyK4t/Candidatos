@@ -2,7 +2,7 @@
 {% block content %}
 	<h1 class="h1">Videos</h1>
     {% for video in videos %}
-        <a href="#" class="galItem">
+        <a href="/candidato/{{ candidato.slug }}/videos/{{ video.slug }}/" class="galItem">
             <img src="{{ STATIC_URL }}images/youtube.png"/>
             <p> {{ video.titulo }} <br>
                 {{ video.texto }}

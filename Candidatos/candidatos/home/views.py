@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from home.models import Candidato, Noticia, Video, GaleriaImagenes, Compromiso, ItemImagen
-import urllib
-import json
+
 
 ##### Inicio Terminado #######
 def inicio(request):
@@ -27,8 +26,7 @@ def candidato(request, n_candidato):
 	noticias = Noticia.objects.all().filter(candidato = candidato, destacada = False)[0:2]
 
 	try:
-		video = Video.objects.get(candidato = candidato, destacado = True)
-		video = embed_video(video.url)
+		video = Video.objects.get(candidato = candidato, destacado = True).embed_video()		
 		galeria = None
 	except:
 		try:
@@ -81,13 +79,7 @@ def videos(request, n_candidato):
 	videos = Video.objects.all().filter(candidato = candidato)
 	return render(request, 'micrositio/videos.html', {"candidato":candidato, "videos":videos})
 
-def video(request):
-	return render(request, 'video01.html')
-
-################### HERRAMIENTAS #################3
-def embed_video(url):	
-	embed = 'http://www.youtube.com/oembed?url={0}&format=json'.format(url)
-	sock = urllib.urlopen(embed)
-	video = json.loads(sock.read())['html']	.replace('480', '390').replace('270', '275')
-	sock.close()
-	return video
+def video(request, n_candidato, i_video):
+	candidato = Candidato.objects.get(slug = n_candidato)
+	video = Video.objects.get(slug = i_video, candidato = candidato)
+	return render(request, 'micrositio/video01.html', {"candidato":candidato, "video":video})

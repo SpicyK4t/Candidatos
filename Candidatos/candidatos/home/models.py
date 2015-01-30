@@ -3,6 +3,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
+import urllib
+import json
 
 #Modelo Publicidad
 class Publicidad(models.Model):
@@ -133,6 +135,20 @@ class Video(models.Model):
 
 	def __unicode__(self):
 		return self.titulo
+
+	def embed_video(self):	
+		embed = 'http://www.youtube.com/oembed?url={0}&format=json'.format(self.url)
+		sock = urllib.urlopen(embed)
+		video = json.loads(sock.read())['html']	.replace('480', '390').replace('270', '275')
+		sock.close()
+		return video
+
+	def watch_video(self):	
+		embed = 'http://www.youtube.com/oembed?url={0}&format=json'.format(self.url)
+		sock = urllib.urlopen(embed)
+		video = json.loads(sock.read())['html']	.replace('480', '583').replace('270', '328')
+		sock.close()
+		return video
 
 	
 

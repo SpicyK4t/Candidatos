@@ -1,0 +1,17 @@
+{% extends "micrositio/base.html" %}
+{% block content %}
+	<h1 class="h1">Videos</h1>
+
+	<a href="/candidato/{{ candidato.slug }}/conoceme/" class="conoceme">
+        <h2>Conóceme</h2>
+        <h3>Descripción</h3>
+        <p>{{ candidato.breveDescripcion  }}</p>
+        <img src="{{ MEDIA_URL }}{{ candidato.conoceme_foto}}" alt="" width="290" height="175" />
+    </a>
+    
+    <article class="noticia">
+      <h2>{{ video.titulo }} </h2>
+		<p> {{ video.texto }}</p>
+        {{ video.watch_video|safe}}
+    </article>
+{% endblock %}
