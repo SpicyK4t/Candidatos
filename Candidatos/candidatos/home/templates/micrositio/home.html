@@ -10,10 +10,10 @@
 
     <article class="destacada">
     	<h2><p>Noticia destacada</p></h2>
-        <img src="{{ STATIC_URL }}images/destacada.jpg" alt="titulo de noticia"/>
+        <img src="{{ MEDIA_URL }}{{ noticia_destacada.imagen }}" width="385" height="130" alt="titulo de noticia"/>
         <h1><a href="/candidato/{{ candidato.slug }}/noticias/{{ noticia_destacada.slug}}/">{{ noticia_destacada.titulo }}</a></h1>
         <p>{{ noticia_destacada.breveDescripcion }}</p>
-        
+        <br>
         <div class="videoInicio">            
             {% if not video == None %}
                 {{ video|safe }}

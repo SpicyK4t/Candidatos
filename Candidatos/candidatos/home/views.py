@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from home.models import Candidato, Noticia, Video, GaleriaImagenes, Compromiso
+from home.models import Candidato, Noticia, Video, GaleriaImagenes, Compromiso, ItemImagen
 import urllib
 import json
 
@@ -44,19 +44,24 @@ def perfil(request, n_candidato):
 	candidato = Candidato.objects.get(slug = n_candidato)
 	return render(request, 'micrositio/conoceme.html', {"candidato":candidato})
 
-####### perfil Compromisos #################
+####### compromisos Terminado #################
 def compromisos(request, n_candidato):
 	candidato = Candidato.objects.get(slug = n_candidato)
 	compromisos = Compromiso.objects.all().filter(candidato = candidato)
 	return render(request, 'micrositio/compromisos.html', {"candidato":candidato, "compromisos":compromisos })
 
+####### galerias Terminado ###############
 def galerias(request, n_candidato):
 	candidato = Candidato.objects.get(slug = n_candidato)
 	galerias = GaleriaImagenes.objects.all().filter(candidato = candidato)
 	return render(request, 'micrositio/galerias.html', {"candidato":candidato, "galerias":galerias})
 
-def galeria(request):
-	return render(request, 'galeria01.html')
+####### galeria Terminada ################
+def galeria(request, n_candidato, i_galeria):
+	candidato = Candidato.objects.get(slug = n_candidato)
+	galeria = GaleriaImagenes.objects.all().filter(slug = i_galeria, candidato = candidato)
+	imagenes = ItemImagen.objects.all().filter(galeria = galeria)
+	return render(request, 'micrositio/galeria01.html', {"candidato":candidato, "galeria":galeria, "imagenes":imagenes})
 
 ###### noticias Terminado ##############
 def noticias(request, n_candidato):
@@ -70,6 +75,7 @@ def noticia(request, n_candidato, t_noticia):
 	noticia = Noticia.objects.get(slug = t_noticia, candidato = candidato)
 	return render(request, 'micrositio/noti01.html', { "candidato":candidato, "noticia":noticia })
 
+###### videos Terminado ################
 def videos(request, n_candidato):
 	candidato = Candidato.objects.get(slug = n_candidato)
 	videos = Video.objects.all().filter(candidato = candidato)
