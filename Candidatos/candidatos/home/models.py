@@ -33,18 +33,18 @@ class Candidato(models.Model):
 		(2, 'Diputado Local'),
 		(3, 'Diputado Federal'),
 	)
-	nombre = models.CharField(max_length = 200)
-	descripcion = models.TextField()
-	fotografia = models.ImageField(upload_to = 'candidato_foto')
-	banner = models.ImageField(upload_to = 'candidato_banner')
-	estilo = models.IntegerField(default = 1, choices = tipos_estilos)
-	partido_politico = models.CharField(max_length = 50)
-	facebook = models.URLField(blank = True)
-	twitter = models.URLField(blank = True)
-	conoceme_foto = models.ImageField(upload_to = 'candidato_conoceme_foto')
-	tipo_candidato = models.IntegerField(default = 1, choices = tipos_candidatos)
-	municipio = models.CharField(max_length =  30)
-	distrito = models.CharField(max_length = 30, blank = True)
+	nombre = models.CharField(max_length = 200, verbose_name = 'Nombre del Candidato')
+	descripcion = models.TextField(verbose_name = 'Descripción personal:')
+	fotografia = models.ImageField(upload_to = 'candidato_foto', verbose_name = 'Fotografía del Candidato')
+	banner = models.ImageField(upload_to = 'candidato_banner', verbose_name = 'Banner de micrositio')
+	estilo = models.IntegerField(default = 1, choices = tipos_estilos, verbose_name = 'Estilo del micrositio')
+	partido_politico = models.CharField(max_length = 50, verbose_name = 'Partido Político')
+	facebook = models.URLField(blank = True, verbose_name = 'URL de Facebook')
+	twitter = models.URLField(blank = True, verbose_name = 'URL de Twitter')
+	conoceme_foto = models.ImageField(upload_to = 'candidato_conoceme_foto', verbose_name = 'Fotografía del Perfíl')
+	tipo_candidato = models.IntegerField(default = 1, choices = tipos_candidatos, verbose_name = 'Tipo de candidato')
+	municipio = models.CharField(max_length =  30, verbose_name = 'Municipio')
+	distrito = models.CharField(max_length = 30, blank = True, verbose_name = 'Distrito')
 	slug = models.SlugField(blank = True)
 
 	def save(self, *args, **kwargs):
@@ -60,21 +60,21 @@ class Candidato(models.Model):
 
 #modelo Compromiso
 class Compromiso(models.Model):
-	candidato = models.ForeignKey(Candidato)
-	imagen = models.ImageField(upload_to = 'compromiso_imagen')
-	texto = models.TextField()
+	candidato = models.ForeignKey(Candidato, verbose_name = 'Compromiso del candidato')
+	imagen = models.ImageField(upload_to = 'compromiso_imagen', verbose_name = 'Imagen de la sección')
+	texto = models.TextField(verbose_name = 'Texto del Compromiso')
 
 	def __unicode__(self):
-		return "Compromiso " + self.candidato.__unicode__()
+		return "Compromiso de " + self.candidato.__unicode__()
 
 #modelo Noticia
 class Noticia(models.Model):
-	candidato = models.ForeignKey(Candidato)
-	titulo = models.CharField(max_length = 100)
-	texto = models.TextField()
-	destacada = models.BooleanField()
-	imagen = models.ImageField(upload_to = 'noticia_imagen', blank = True)
-	fecha_publicacion = models.DateField(auto_now = True, auto_now_add = True)
+	candidato = models.ForeignKey(Candidato, verbose_name='Noticia del Candidato')
+	titulo = models.CharField(max_length = 100, verbose_name='Título de la noticia')
+	texto = models.TextField(verbose_name='Texto de la noticia')
+	destacada = models.BooleanField(verbose_name='¿La noticia es destacada?')
+	imagen = models.ImageField(upload_to = 'noticia_imagen', blank = True, verbose_name='Imagen de la noticia')
+	fecha_publicacion = models.DateField(auto_now = True, auto_now_add = True, verbose_name='Fecha de publicación')
 	slug = models.SlugField(blank = True)
 
 	def save(self, *args, **kwargs):
@@ -90,10 +90,10 @@ class Noticia(models.Model):
 
 #modelo Galeria
 class GaleriaImagenes(models.Model):
-	candidato = models.ForeignKey(Candidato)
-	nombre = models.CharField(max_length = 100)
-	imagen = models.ImageField(upload_to = 'galeria_imagen')
-	destacada = models.BooleanField()	
+	candidato = models.ForeignKey(Candidato, verbose_name = 'Galeria del candidato')
+	nombre = models.CharField(max_length = 100, verbose_name = 'Nombre de la galeria')
+	imagen = models.ImageField(upload_to = 'galeria_imagen', verbose_name = 'Imagen de portada')
+	destacada = models.BooleanField(verbose_name = '¿La galeria es destacada?')	
 	slug = models.SlugField(blank = True)
 
 	def save(self, *args, **kwargs):
@@ -106,9 +106,9 @@ class GaleriaImagenes(models.Model):
 
 #modelo ItemImagen
 class ItemImagen(models.Model):
-	galeria = models.ForeignKey(GaleriaImagenes)
-	imagen = models.ImageField(upload_to = 'galeria_imagen')
-	texto = models.TextField()
+	galeria = models.ForeignKey(GaleriaImagenes, verbose_name='Imagen de la Galería:')
+	imagen = models.ImageField(upload_to = 'galeria_imagen', verbose_name='Imagen')
+	texto = models.TextField(verbose_name='Texto de la imagen')
 	slug = models.SlugField(blank = True)
 
 	def save(self, *args, **kwargs):
@@ -121,11 +121,11 @@ class ItemImagen(models.Model):
 
 #modelo ItemVideo
 class Video(models.Model):
-	candidato = models.ForeignKey(Candidato)
-	titulo = models.CharField(max_length = 30)
-	texto = models.TextField()
-	destacado = models.BooleanField()
-	url = models.URLField()
+	candidato = models.ForeignKey(Candidato, verbose_name='Video del candidato:')
+	titulo = models.CharField(max_length = 30, verbose_name='Título del Video')
+	texto = models.TextField(verbose_name='Descripción del Video')
+	destacado = models.BooleanField(verbose_name = '¿El video es destacado?')
+	url = models.URLField(verbose_name='URL del video de youtube')
 	slug = models.SlugField(blank = True)
 
 	def save(self, *args, **kwargs):
